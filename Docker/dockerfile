@@ -1,0 +1,32 @@
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    openmpi-bin \
+    libopenmpi-dev \
+    openssh-server \
+    openssh-client \
+    iputils-ping \
+    nano \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /var/run/sshd
+
+RUN useradd -m -s /bin/bash mpiuser
+
+RUN echo "mpiuser:mpi123" | chpasswd
+
+RUN mkdir -p /home/mpiuser/.ssh
+
+RUN chown -R mpiuser:mpiuser /home/mpiuser/.ssh
+
+COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 22
+
+CMD ["/entrypoint.sh"]
+

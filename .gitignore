@@ -1,0 +1,22 @@
+# Binarios compilados (Linux, sin extension)
+src/pi_sequential
+src/pi_openmp
+src/pi_mpi
+src/pi_hybrid
+src/prueba_openmp
+src/hello_openmp
+src/comparacion_openmp
+src/mandelbrot_openmp
+src/mandelbrot_regiones
+
+# Archivos objeto
+*.o
+*.out
+
+# Imagenes generadas
+Results/*.ppm
+Results/*.png
+
+# OS
+.DS_Store
+Thumbs.db
